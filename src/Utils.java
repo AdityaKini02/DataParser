@@ -40,6 +40,7 @@ public class Utils {
             int endIndex = line.indexOf("\"", startIndex  + 1);
 
             removeCharacter(line, "," , startIndex, endIndex);
+            removeCharacter(line, "%");
 
 
 
@@ -63,6 +64,16 @@ public class Utils {
         return electionResults;
     }
 
+    private static String removeCharacter(String line, String s){
+        String newString = "";
+        for (int i = 0; i < line.length() - 1; i++) {
+            if (! line.substring(i, i+1).equals(s)){
+                newString += line.substring(i, i+1);
+            }
+        }
+        return newString;
+
+    }
 
 
     private static String removeCharacter(String line, String s, int startIndex, int endIndex) {
