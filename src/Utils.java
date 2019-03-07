@@ -29,18 +29,20 @@ public class Utils {
         //remove the commas, and create a new Election Result object
         //store it into electionResults
 
-        String d = normalizeLineBreaks(readFileAsString(data));
-        String[] lines = d.split("\n");
+        //String d = normalizeLineBreaks(readFileAsString(data));
+
+        String[] lines = readFileAsString(data).split("\n");
 
         for (int i = 0; i < lines.length; i++) {
-            String line = lines[i];
+            String line = lines[i].substring(2);
 
-            for (int j = 0; j < line.length(); j++) {
-                String character = line.substring(j, j + 1);
-                if (character.equals("%")){
-                    character.replace("%", "");
-                }
-            }
+            int startIndex = line.indexOf("\"");
+            int endIndex = line.indexOf("\"", startIndex  + 1);
+
+            removeCharacter(line, "," , startIndex, endIndex);
+
+
+
 
             String[] info = line.split(",");
             double  votes_dem = Double.parseDouble(info[0]);
@@ -58,18 +60,25 @@ public class Utils {
             electionResults.add(e);
 
         }
-
         return electionResults;
-
-
     }
 
-    private static String normalizeLineBreaks(String s) {
-        s= s.replace('\u00A0',' '); // remove non-breaking whitespace characters
-        s= s.replace('\u2007',' ');
-        s= s.replace('\u202F',' ');
-        s= s.replace('\uFEFF',' ');
 
-        return s.replace("\r\n", "\n").replace('\r', '\n');
+
+    private static String removeCharacter(String line, String s, int startIndex, int endIndex) {
+        String newString = "";
+        if(line.contains(s)) {
+            String val = line.substring(startIndex + 1, endIndex);
+
+            for (int i = 0; i < val.length() - 1; i++) {
+                if (! val.substring(i, i+1).equals(s)){
+                    newString += val.substring(i, i+1);
+                }
+            }
+
+        }
+        return newString;
     }
+
+
 }
