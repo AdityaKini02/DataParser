@@ -1,3 +1,4 @@
+import javax.xml.crypto.Data;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -66,6 +67,55 @@ public class Utils {
     }
 
 
+    public static ArrayList<Employment2016> parse2016EmploymentResults(String data){
+        ArrayList<Employment2016> employment2016 = new ArrayList<>();
+        String[] lines = readFileAsString(data).split("\n");
+
+
+
+        return employment2016;
+
+    }
+
+    public static ArrayList<Education2016> parse2016Education(String data){
+        ArrayList<Education2016> education2016 = new ArrayList<>();
+        String[] lines = readFileAsString(data).split("\n");
+
+        return education2016;
+    }
+
+    public static ArrayList<County> parseCountyData(String data){
+        ArrayList<County> county = new ArrayList<>();
+        String[] lines = readFileAsString(data).split("\n");
+
+        return county;
+    }
+
+    public static ArrayList<State> parseStateData(String data){
+        ArrayList<State> state = new ArrayList<>();
+        String[] lines = readFileAsString(data).split("\n");
+
+        return state;
+    }
+
+    public static ArrayList<DataManager> parseDataManager(String data){
+        ArrayList<DataManager> dataManager = new ArrayList<>();
+        String[] lines = readFileAsString(data).split("\n");
+
+        return dataManager;
+    }
+
+    public static ArrayList<Election2016> parse2016Election(String data){
+        ArrayList<Election2016> election2016 = new ArrayList<>();
+        String[] lines = readFileAsString(data).split("\n");
+
+        return election2016;
+    }
+
+
+
+
+
     private static String removeCharacter(String line, String s){
         String newString = "";
         for (int i = 0; i < line.length(); i++) {
@@ -93,4 +143,6 @@ public class Utils {
         }
         return newString;
     }
+
+
 }
