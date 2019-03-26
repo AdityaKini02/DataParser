@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /***
  * Main class for data parsers
@@ -12,10 +13,8 @@ public class Main {
         String education = Utils.readFileAsString("data/Education.csv");
         String unemployment = Utils.readFileAsString("data/Unemployment.csv");
 
-        //System.out.println(data);
-        Utils.parse2016EmploymentResults(unemployment);
-
-        //DataManager datamanager = new DataManager(Utils.parseStateData(presidentialResults2016));
+        ArrayList<Education2016> educationData = Utils.parse2016Education("data/Education.csv");
+        ArrayList<Employment2016> employmentData = Utils.parse2016EmploymentResults("data/Unemployment.csv");
 
 
 

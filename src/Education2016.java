@@ -3,11 +3,15 @@ public class Education2016 {
     private double onlyHighSchool;
     private double noCollege;
     private double bachelorsOrMore;
+    private String state;
+    private String county;
 
     //Only need: onlyHighSchool
 
-    public Education2016(double onlyHighSchool) {
+    public Education2016(String state, String county, double onlyHighSchool) {
         this.onlyHighSchool = onlyHighSchool;
+        this.state = state;
+        this.county = county;
 
         this.noHighSchool = noHighSchool;
         this.noCollege = noCollege;

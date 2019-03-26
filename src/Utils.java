@@ -7,6 +7,66 @@ import java.util.Scanner;
 
 public class Utils {
 
+    public static ArrayList<Employment2016> parse2016EmploymentResults(String filepath){
+        ArrayList<Employment2016> employment2016 = new ArrayList<>();
+
+        String[] lines = readFileAsString(filepath).split("\n");
+        ArrayList<String[]> parsedLines = parseLinesIntoArrays(lines, 9);
+
+        // populate employment2016
+        for (int i = 0; i < parsedLines.size(); i++) {
+            String[] arr = parsedLines.get(i);
+            if(arr.length >= 45){
+                String state = arr[1];
+                String county = arr[2];
+                int unemployedPopulation = Integer.parseInt(arr[44].trim());
+                employment2016.add(new Employment2016(state, county, unemployedPopulation));
+            }
+        }
+
+        return employment2016;
+    }
+
+    public static ArrayList<Education2016> parse2016Education(String data){
+        ArrayList<Education2016> education2016 = new ArrayList<>();
+
+        String[] lines = readFileAsString(data).split("\n");
+        ArrayList<String[]> parsedLines = parseLinesIntoArrays(lines, 6);
+
+        //populate education2016
+        for (int i = 0; i < parsedLines.size(); i++) {
+            String[] arr = parsedLines.get(i);
+            if(arr.length >= 40){
+                String state = arr[1];
+                String county = arr[2];
+                int onlyHighschool = (int)Double.parseDouble(arr[40].trim());
+                education2016.add(new Education2016(state, county, onlyHighschool));
+            }
+
+        }
+
+        return education2016;
+    }
+
+    public static ArrayList<County> parseCountyData(String data){
+        ArrayList<County> county = new ArrayList<>();
+        String[] lines = readFileAsString(data).split("\n");
+
+        return county;
+    }
+
+    public static ArrayList<DataManager> parseDataManager(String data){
+        ArrayList<DataManager> dataManager = new ArrayList<>();
+        String[] lines = readFileAsString(data).split("\n");
+
+        return dataManager;
+    }
+
+
+
+
+    // HELPER METHODS
+
     public static String readFileAsString(String filepath) {
         StringBuilder output = new StringBuilder();
 
@@ -31,116 +91,6 @@ public class Utils {
 
         return s.replace("\r\n", "\n").replace('\r', '\n');
     }
-
-    public static void  parse2016ElectionResults(String data) {
-
-        //ArrayList<ElectionResult>
-
-        ArrayList<ElectionResult> electionResults = new ArrayList<>();
-        String d = (readFileAsString(data));
-        String[] lines = d.split("\n");
-
-//        for (int i = 0; i < lines.length; i++) {
-//            String line = lines[i];
-//            int startIndex = line.indexOf(",") + 1;
-//
-//            line = line.substring(startIndex);
-//
-//            int indexOfFirstQuotation = line.indexOf("\"");
-//            int indexOfLastQuotation = line.lastIndexOf("\"");
-//            String[] info = null;
-//
-//            for (int j = 0; j < line.length(); j++) {
-//                line = removeCharacter(line, "%");
-//                line = removeCharacter(line, "," , indexOfFirstQuotation,indexOfLastQuotation);
-//                line = removeCharacter(line, "\"");
-//                info = line.split(",");
-//
-//            }
-//
-//            double  votes_dem = Double.parseDouble(info[0]);
-//            double votes_gop = Double.parseDouble(info[1]);
-//            double total_votes = Double.parseDouble(info[2]);
-//            double per_dem = Double.parseDouble(info[3]);
-//            double per_gop = Double.parseDouble(info[4]);
-//            int diff = Integer.parseInt(info[5]);
-//            double per_point_diff = Double.parseDouble(info[6]);
-//            String state_abbr = info[7];
-//            String county_name = info[8];
-//            int combined_fips = Integer.parseInt(info[9]);
-//
-//            ElectionResult e = new ElectionResult(votes_dem,votes_gop,total_votes,per_dem,per_gop,diff,per_point_diff,state_abbr,county_name,combined_fips);
-//            electionResults.add(e);
-//
-//
-//        }
-//
-//        return electionResults;
-
-    }
-
-
-
-    public static ArrayList<Employment2016> parse2016EmploymentResults(String data){
-        ArrayList<Employment2016> employment2016 = new ArrayList<>();
-        String[] lines = readFileAsString(data).split("\n");
-
-        for (int i = 0; i < lines.length; i++) {
-            String current = lines[i];
-            current = removeQuotations(current);
-            String[] arr = current.split(",");
-
-            String name = arr[2];
-            String countyName = arr[3];
-            int unemployedPopulation = Integer.parseInt(arr[45]);
-
-        }
-        return employment2016;
-    }
-
-    public static ArrayList<Education2016> parse2016Education(String data){
-        ArrayList<Education2016> education2016 = new ArrayList<>();
-        String[] lines = readFileAsString(data).split("\n");
-
-        for (int i = 0; i < lines.length; i++) {
-            String current = lines[i];
-            current = removeQuotations(current);
-            String[] arr = current.split(",");
-
-            String name = arr[2];
-            String countyName = arr[3];
-            int onlyHighSchool = Integer.parseInt(arr[49]);
-
-
-
-        }
-
-        return education2016;
-    }
-
-    public static ArrayList<County> parseCountyData(String data){
-        ArrayList<County> county = new ArrayList<>();
-        String[] lines = readFileAsString(data).split("\n");
-
-        return county;
-    }
-
-    public static ArrayList<DataManager> parseDataManager(String data){
-        ArrayList<DataManager> dataManager = new ArrayList<>();
-        String[] lines = readFileAsString(data).split("\n");
-
-        return dataManager;
-    }
-
-    public static ArrayList<Election2016> parse2016Election(String data){
-        ArrayList<Election2016> election2016 = new ArrayList<>();
-        String[] lines = readFileAsString(data).split("\n");
-
-        return election2016;
-    }
-
-
-    // HELPER METHODS
 
     public static String removeCharacter(String line, String s){
         String newString = "";
@@ -169,6 +119,21 @@ public class Utils {
 
         line = removeCharacter(line, "\"");
         return line;
+    }
+
+    public static ArrayList<String[]> parseLinesIntoArrays(String[] lines, int startIndex){
+        ArrayList<String[]> parsedLines = new ArrayList<>();
+
+        for (int i = startIndex; i < lines.length; i++) {
+            String current = lines[i];
+            current = removeQuotations(current);
+            String[] arr = current.split(",");
+            if (arr.length > 0) {
+                parsedLines.add(arr);
+            }
+        }
+
+        return parsedLines;
     }
 
 }
