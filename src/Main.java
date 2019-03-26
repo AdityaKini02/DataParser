@@ -9,12 +9,18 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) {
-        String presidentialResults2016 = Utils.readFileAsString("data/2016_Presidential_Results.csv");
-        String education = Utils.readFileAsString("data/Education.csv");
-        String unemployment = Utils.readFileAsString("data/Unemployment.csv");
+        String presidentialResults2016 = "data/2016_Presidential_Results.csv";
+        String education = "data/Education.csv";
+        String unemployment = "data/Unemployment.csv";
+        String communityCareCenters = "data/community-care-licensing-adult-residential-facility-locations.csv";
 
-        ArrayList<Education2016> educationData = Utils.parse2016Education("data/Education.csv");
-        ArrayList<Employment2016> employmentData = Utils.parse2016EmploymentResults("data/Unemployment.csv");
+        ArrayList<Education2016> educationData = Utils.parse2016Education(education);
+        ArrayList<Employment2016> employmentData = Utils.parse2016EmploymentResults(unemployment);
+        ArrayList<CommunityCenter> communityCenterData = Utils.parseCommunityCenterData(communityCareCenters);
+
+
+        ArrayList<County> counties = new ArrayList<>();
+
 
 
 

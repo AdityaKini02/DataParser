@@ -27,10 +27,10 @@ public class Utils {
         return employment2016;
     }
 
-    public static ArrayList<Education2016> parse2016Education(String data){
+    public static ArrayList<Education2016> parse2016Education(String filepath){
         ArrayList<Education2016> education2016 = new ArrayList<>();
 
-        String[] lines = readFileAsString(data).split("\n");
+        String[] lines = readFileAsString(filepath).split("\n");
         ArrayList<String[]> parsedLines = parseLinesIntoArrays(lines, 6);
 
         //populate education2016
@@ -46,6 +46,29 @@ public class Utils {
         }
 
         return education2016;
+    }
+
+    public static ArrayList<CommunityCenter> parseCommunityCenterData(String filepath){
+        ArrayList<CommunityCenter> CommunityCenterData = new ArrayList<>();
+
+        String[] lines = readFileAsString(filepath).split("\n");
+        ArrayList<String[]> parsedLines = parseLinesIntoArrays(lines, 2);
+
+        //populate CommunityCenterData
+        for (int i = 0; i < parsedLines.size(); i++) {
+            String[] arr = parsedLines.get(i);
+            if(arr.length >= 13){
+                String state = arr[8];
+                String county = arr[10];
+                String status = arr[13];
+                if (status.equals("LICENSED")) {
+                    CommunityCenterData.add(new CommunityCenter(state, county));
+                }
+            }
+
+        }
+
+        return CommunityCenterData;
     }
 
     public static ArrayList<County> parseCountyData(String data){
