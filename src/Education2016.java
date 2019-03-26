@@ -4,19 +4,14 @@ public class Education2016 {
     private double noCollege;
     private double bachelorsOrMore;
 
-    public Education2016(double noHighSchool, double onlyHighSchool, double noCollege, double bachelorsOrMore) {
-        this.noHighSchool = noHighSchool;
+    //Only need: onlyHighSchool
+
+    public Education2016(double onlyHighSchool) {
         this.onlyHighSchool = onlyHighSchool;
+
+        this.noHighSchool = noHighSchool;
         this.noCollege = noCollege;
         this.bachelorsOrMore = bachelorsOrMore;
-    }
-
-    public double getNoHighSchool() {
-        return noHighSchool;
-    }
-
-    public void setNoHighSchool(double noHighSchool) {
-        this.noHighSchool = noHighSchool;
     }
 
     public double getOnlyHighSchool() {
@@ -25,6 +20,17 @@ public class Education2016 {
 
     public void setOnlyHighSchool(double onlyHighSchool) {
         this.onlyHighSchool = onlyHighSchool;
+    }
+
+
+    //EXTRAS
+
+    public double getNoHighSchool() {
+        return noHighSchool;
+    }
+
+    public void setNoHighSchool(double noHighSchool) {
+        this.noHighSchool = noHighSchool;
     }
 
     public double getNoCollege() {
