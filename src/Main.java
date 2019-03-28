@@ -55,7 +55,7 @@ public class Main {
         }
 
 
-        //
+        //Set communityCenterData
         for (int i = 0; i < communityCenterData.size(); i++) {
             CommunityCenter countyCommunityCenter = communityCenterData.get(i);
             if(countyCommunityCenter.getState().equals(state)){
