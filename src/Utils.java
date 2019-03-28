@@ -8,30 +8,6 @@ import java.util.Scanner;
 
 public class Utils {
 
-
-    //Parse Employment Data
-    public static ArrayList<Employment2016> parse2016EmploymentResults(String filepath){
-        ArrayList<Employment2016> employment2016 = new ArrayList<>();
-
-        String[] lines = readFileAsString(filepath).split("\n");
-        ArrayList<String[]> parsedLines = parseLinesIntoArrays(lines, 9);
-
-        // populate employment2016
-        for (int i = 0; i < parsedLines.size(); i++) {
-            String[] arr = parsedLines.get(i);
-            if(arr.length >= 44){
-                String state = arr[1].trim();
-                String county = arr[2];
-                county = fixCountyName(county);
-                int unemployedPopulation = Integer.parseInt(arr[44].trim());
-                employment2016.add(new Employment2016(state, county, unemployedPopulation));
-            }
-        }
-
-        return employment2016;
-    }
-
-
     //Parse Education Data
     public static ArrayList<Education2016> parse2016Education(String filepath){
         ArrayList<Education2016> education2016 = new ArrayList<>();
@@ -54,6 +30,28 @@ public class Utils {
         }
 
         return education2016;
+    }
+
+    //Parse Employment Data
+    public static ArrayList<Employment2016> parse2016EmploymentResults(String filepath){
+        ArrayList<Employment2016> employment2016 = new ArrayList<>();
+
+        String[] lines = readFileAsString(filepath).split("\n");
+        ArrayList<String[]> parsedLines = parseLinesIntoArrays(lines, 9);
+
+        // populate employment2016
+        for (int i = 0; i < parsedLines.size(); i++) {
+            String[] arr = parsedLines.get(i);
+            if(arr.length >= 44){
+                String state = arr[1].trim();
+                String county = arr[2];
+                county = fixCountyName(county);
+                int unemployedPopulation = Integer.parseInt(arr[44].trim());
+                employment2016.add(new Employment2016(state, county, unemployedPopulation));
+            }
+        }
+
+        return employment2016;
     }
 
 
@@ -194,9 +192,6 @@ public class Utils {
         return s;
     }
 
-    public static String fixCommunityCareName(String s){
-        return s.toLowerCase();
-    }
 
     public static String removePhrase(String s, String phrase){
         int index = s.indexOf(phrase);
@@ -205,6 +200,10 @@ public class Utils {
         s = s.trim();
         s = s.toLowerCase();
         return s;
+    }
+
+    public static String fixCommunityCareName(String s){
+        return s.toLowerCase();
     }
 
 }

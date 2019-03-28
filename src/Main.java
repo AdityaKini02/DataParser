@@ -10,21 +10,25 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) {
+
         String presidentialResults2016 = "data/2016_Presidential_Results.csv";
         String education = "data/Education.csv";
         String unemployment = "data/Unemployment.csv";
         String communityCareCenters = "data/community-care-licensing-adult-residential-facility-locations.csv";
 
 
-        //Parse 3 CSV Files
+        //Parse CSV File Data
         ArrayList<Education2016> educationData = Utils.parse2016Education(education);
         ArrayList<Employment2016> employmentData = Utils.parse2016EmploymentResults(unemployment);
         ArrayList<CommunityCenter> communityCenterData = Utils.parseCommunityCenterData(communityCareCenters);
 
 
+        //Prompt User
         String state = JOptionPane.showInputDialog("Input State Abbreviation");
         DataManager dataManager = new DataManager(state);
         
+
+        //Set educationData
         for (int i = 0; i < educationData.size(); i++) {
             Education2016 countyEducation = educationData.get(i);
             if (countyEducation.getState().equals(state)) {
@@ -38,6 +42,8 @@ public class Main {
 
         }
 
+
+        //Set employment Data
         for (int i = 0; i < employmentData.size(); i++) {
             Employment2016 countyEmployment = employmentData.get(i);
             if(countyEmployment.getState().equals(state)){
@@ -48,6 +54,8 @@ public class Main {
             }
         }
 
+
+        //
         for (int i = 0; i < communityCenterData.size(); i++) {
             CommunityCenter countyCommunityCenter = communityCenterData.get(i);
             if(countyCommunityCenter.getState().equals(state)){

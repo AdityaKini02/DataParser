@@ -6,8 +6,6 @@ public class County {
     private int communityCenters;
 
 
-
-
 //    County defined by the number of people who:
 //    - Only graduated High School
 //    - Unemployed
