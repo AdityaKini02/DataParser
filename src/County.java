@@ -1,10 +1,11 @@
 public class County {
+    private String state;
     private String name;
-    private int fips;
-    private Election2016 vote2016;
-    private Education2016 educ2016;
-    private Employment2016 employ2016;
-    private int CommunityCenters;
+    private int onlyHighSchool;
+    private int unemployed;
+    private int communityCenters;
+
+
 
 
 //    County defined by the number of people who:
@@ -13,14 +14,14 @@ public class County {
 //    - Number of community centers
 
 
-    public County(String name, int fips, Education2016 educ2016, Employment2016 employ2016, int CommunityCenters) {
+    public County(String state, String name) {
+        this.state = state;
         this.name = name;
-        this.fips = fips;
-        this.educ2016 = educ2016;
-        this.employ2016 = employ2016;
-        this.CommunityCenters = CommunityCenters;
 
-        this.vote2016 = vote2016;
+        onlyHighSchool = 0;
+        unemployed = 0;
+        communityCenters = 0;
+
     }
 
     public String getName() {
@@ -31,29 +32,35 @@ public class County {
         this.name = name;
     }
 
-    public int getFips() {
-        return fips;
+    public String getState() {
+        return state;
     }
 
-    public void setFips(int fips) {
-        this.fips = fips;
+    public void setState(String state) {
+        this.state = state;
     }
 
-
-    public Education2016 getEduc2016() {
-        return educ2016;
+    public int getOnlyHighSchool() {
+        return onlyHighSchool;
     }
 
-    public void setEduc2016(Education2016 educ2016) {
-        this.educ2016 = educ2016;
+    public void setOnlyHighSchool(int onlyHighSchool) {
+        this.onlyHighSchool = onlyHighSchool;
     }
 
-    //EXTRAS
-    public Election2016 getVote2016() {
-        return vote2016;
+    public int getUnemployed() {
+        return unemployed;
     }
 
-    public void setVote2016(Election2016 vote2016) {
-        this.vote2016 = vote2016;
+    public void setUnemployed(int unemployed) {
+        this.unemployed = unemployed;
+    }
+
+    public int getCommunityCenters() {
+        return communityCenters;
+    }
+
+    public void incrementCommunityCenter() {
+        this.communityCenters++;
     }
 }

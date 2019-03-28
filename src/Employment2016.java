@@ -1,13 +1,13 @@
 public class Employment2016 {
     private String State;
     private String County;
+    private int unemployedLaborForce;
+
     private int totalLaborForce;
     private int employedLaborForce;
-    private int unemployedLaborForce;
     private double unemploymentPercent;
 
 
-    // Only need: Unemployed population
 
     public Employment2016(String State, String County, int unemployedLaborForce) {
         this.unemployedLaborForce = unemployedLaborForce;
@@ -29,8 +29,21 @@ public class Employment2016 {
         this.unemployedLaborForce = unemployedLaborForce;
     }
 
+    public String getState() {
+        return State;
+    }
 
+    public void setState(String state) {
+        State = state;
+    }
 
+    public String getCounty() {
+        return County;
+    }
+
+    public void setCounty(String county) {
+        County = county;
+    }
 
     //EXTRAS
 
